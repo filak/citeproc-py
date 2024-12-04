@@ -95,13 +95,24 @@ class CitationStylesElement(SomewhatObjectifiedElement):
         return self.markup(self.process(*args, **kwargs))
 
     # TODO: Locale methods
-    def get_term(self, name, form=None):
+    def get_term(self, name, form=None, fallback_locale=True, zero_padded=False):
+        lg_key = "{http://www.w3.org/XML/1998/namespace}lang"
         if isinstance(self.get_root(), Locale):
             return self.get_root().get_term(name, form)
         else:
-            for locale in self.get_root().locales:
+            locales = self.get_root().locales
+            if not fallback_locale and len(locales) > 1:
+                main_locale = locales[0]
+                main_lg = main_locale.attrib.get(lg_key, None)
+                if main_lg:
+                    new_locales = [main_locale]
+                    for locale in locales[1::]:
+                        if locale.get(lg_key, main_lg) == main_lg:
+                            new_locales.append(locale)
+                    locales = new_locales
+            for locale in locales:
                 try:
-                    return locale.get_term(name, form)
+                    return locale.get_term(name, form, zero_padded=zero_padded)
                 except IndexError: # TODO: create custom exception
                     continue
 
@@ -167,12 +178,15 @@ class Locale(CitationStylesElement):
     _default_options = {'limit-day-ordinals-to-day-1': 'false',
                         'punctuation-in-quote': 'false'}
 
-    def get_term(self, name, form=None):
+    def get_term(self, name, form=None, zero_padded=False):
         attributes = "@name='{}'".format(name)
         if form is not None:
             attributes += " and @form='{}'".format(form)
         else:
             attributes += " and not(@form)"
+        if zero_padded:
+            attributes += "and not(@match='whole-number')"
+            attributes += "and not(@match='last-two-digits')"
         expr = './cs:term[{}]'.format(attributes)
         try:
             return self.terms.xpath_search(expr)[0]
@@ -754,10 +768,13 @@ class Text(CitationStylesElement, FormatNumber, Formatted, Affixed, Quoted,
             form = None
         term = self.get_term(self.get('term'), form)
 
-        if plural:
-            text = term.multiple
+        if term is not None:
+            if plural:
+                text = term.multiple
+            else:
+                text = term.single
         else:
-            text = term.single
+            text = None
 
         return text
 
@@ -933,7 +950,11 @@ class Date_Part(CitationStylesElement, Formatted, Affixed, TextCased,
                 text = context.get_term('{}-{:02}'.format(term, index)).single
             elif form == 'short':
                 term = context.get_term('{}-{:02}'.format(term, index), 'short')
-                text = term.single
+
+                if term is not None:
+                    text = term.single
+                else:
+                    text = None
             else:
                 assert term == 'month'
                 if form == 'numeric':
@@ -1044,21 +1065,24 @@ class Names(CitationStylesElement, Parent, Formatted, Affixed, Delimited):
                 if name_elem is None:
                     name_elem = Name()
                     names_context.insert(0, name_elem)
-                text = name_elem.render(item, role, context=context, **kwargs)
-                plural = len(item.reference[role]) > 1
+                text = None
                 try:
+                    text = name_elem.render(item, role, context=context, **kwargs)
+                    plural = len(item.reference[role]) > 1
                     if ed_trans:
                         role = 'editortranslator'
                     label_element = names_context.label
-                    label = label_element.render(item, role, plural, **kwargs)
-                    if label is not None:
-                        if label_element is names_context.getchildren()[0]:
-                            text = label + text
-                        else:
-                            text = text + label
+                    if label_element is not None:
+                        label = label_element.render(item, role, plural, **kwargs)
+                        if label is not None:
+                            if label_element is names_context.getchildren()[0]:
+                                text = label + text
+                            else:
+                                text = text + label
                 except AttributeError:
                     pass
-                output.append(text)
+                if text is not None:
+                    output.append(text)
 
         if output:
             try:
@@ -1324,11 +1348,14 @@ class Label(CitationStylesElement, Formatted, Affixed, StrippedPeriods,
         else:
             term = self.get_term(variable, form)
 
-        if (plural_option == 'contextual' and plural or
-            plural_option == 'always'):
-            text = term.multiple
+        if term is not None:
+            if (plural_option == 'contextual' and plural or
+                plural_option == 'always'):
+                text = term.multiple
+            else:
+                text = term.single
         else:
-            text = term.single
+            text = None
 
         return text
 
@@ -1526,14 +1553,25 @@ class Else(CitationStylesElement, Parent):
 # utility functions
 
 def to_ordinal(number, context):
-    number = str(number)
-    last_digit = int(number[-1])
-    if last_digit in (1, 2, 3) and not (len(number) > 1 and number[-2] == '1'):
-        ordinal_term = 'ordinal-{:02}'.format(last_digit)
+    zero_padded = False
+    fallback_locale = False
+    if len(str(number)) == 1:
+        ordinal_term = f'ordinal-{number:02}'
     else:
-        ordinal_term = 'ordinal-04'
-    return number + context.get_term(ordinal_term).single
+        ordinal_term = f'ordinal-{number}'
 
+    def get_ordinal_term():
+        return context.get_term(ordinal_term, fallback_locale=fallback_locale, zero_padded=zero_padded)
+
+    if get_ordinal_term() is None:
+        ordinal_term = f'ordinal-{int(str(number)[-1]):02}'
+        zero_padded = True
+        if get_ordinal_term() is None:
+            zero_padded = False
+            ordinal_term = f'ordinal'
+        if get_ordinal_term() is None:
+            fallback_locale = True
+    return str(number) + get_ordinal_term().single
 
 def romanize(n):
     # by Kay Schluehr - from http://billmill.org/python_roman.html
