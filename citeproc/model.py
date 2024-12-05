@@ -74,10 +74,21 @@ class CitationStylesElement(SomewhatObjectifiedElement):
 
     def get_macro(self, name):
         expression = "cs:macro[@name='{}'][1]".format(name)
-        return self.get_root().xpath_search(expression)[0]
+        if expression is not None:
+            macros = self.get_root().xpath_search(expression)
+            if macros is not None:
+                return macros[0]
+            else:
+                pass
+        else:
+            pass
 
     def get_layout(self):
-        return self.xpath_search('./ancestor-or-self::cs:layout[1]')[0]
+        layouts = self.xpath_search('./ancestor-or-self::cs:layout[1]')
+        if layouts is not None:
+            return layouts[0]
+        else:
+            pass
 
     def get_formatter(self):
         if isinstance(self.get_root(), Locale):
@@ -92,6 +103,8 @@ class CitationStylesElement(SomewhatObjectifiedElement):
         return self.preformat(unicodedata.lookup(name))
 
     def render(self, *args, **kwargs):
+        if not args or args[0] is None:
+            pass
         return self.markup(self.process(*args, **kwargs))
 
     # TODO: Locale methods
@@ -716,6 +729,8 @@ class Text(CitationStylesElement, FormatNumber, Formatted, Affixed, Quoted,
             return False
 
     def render(self, *args, **kwargs):
+        if not args or args[0] is None:
+            pass
         text, language = self.process(*args, **kwargs)
         return self.markup(text, language)
 
