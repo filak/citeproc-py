@@ -67,7 +67,7 @@ setup(
                             'data/locales/locales.json',
                             'data/schema/*.rng',
                             'data/styles/*.csl']},
-    python_requires='>=3.7',
+    python_requires='>=3.9',
     scripts=['bin/csl_unsorted'],
     setup_requires=['rnc2rng>=2.7.0'],
     install_requires=['lxml'],
@@ -95,16 +95,14 @@ setup(
         'License :: OSI Approved :: BSD License',
         'Operating System :: OS Independent',
         'Programming Language :: Python',
-        'Programming Language :: Python :: 3.7',
-        'Programming Language :: Python :: 3.8',
         'Programming Language :: Python :: 3.9',
         'Programming Language :: Python :: 3.10',
         'Programming Language :: Python :: 3.11',
         'Programming Language :: Python :: 3.12',
+        'Programming Language :: Python :: 3.13',
         'Topic :: Documentation',
         'Topic :: Printing',
         'Topic :: Software Development :: Documentation',
         'Topic :: Software Development :: Libraries :: Python Modules',
     ]
 )
-
