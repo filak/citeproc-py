@@ -783,11 +783,8 @@ class Text(CitationStylesElement, FormatNumber, Formatted, Affixed, Quoted,
             form = None
         term = self.get_term(self.get('term'), form)
 
-        if term is not None:
-            if plural:
-                text = term.multiple
-            else:
-                text = term.single
+        if plural:
+            text = term.multiple
         else:
             text = None
 
