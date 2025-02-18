@@ -69,7 +69,7 @@ setup(
                             'data/styles/*.csl']},
     python_requires='>=3.9',
     scripts=['bin/csl_unsorted'],
-    setup_requires=['rnc2rng>=2.6.1,!=2.6.2'],
+    setup_requires=['rnc2rng>=2.7.0'],
     install_requires=['lxml'],
     provides=[PACKAGE],
     #test_suite='nose.collector',

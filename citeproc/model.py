@@ -74,10 +74,21 @@ class CitationStylesElement(SomewhatObjectifiedElement):
 
     def get_macro(self, name):
         expression = "cs:macro[@name='{}'][1]".format(name)
-        return self.get_root().xpath_search(expression)[0]
+        if expression is not None:
+            macros = self.get_root().xpath_search(expression)
+            if macros is not None:
+                return macros[0]
+            else:
+                pass
+        else:
+            pass
 
     def get_layout(self):
-        return self.xpath_search('./ancestor-or-self::cs:layout[1]')[0]
+        layouts = self.xpath_search('./ancestor-or-self::cs:layout[1]')
+        if layouts is not None:
+            return layouts[0]
+        else:
+            pass
 
     def get_formatter(self):
         if isinstance(self.get_root(), Locale):
@@ -92,6 +103,8 @@ class CitationStylesElement(SomewhatObjectifiedElement):
         return self.preformat(unicodedata.lookup(name))
 
     def render(self, *args, **kwargs):
+        if not args or args[0] is None:
+            pass
         return self.markup(self.process(*args, **kwargs))
 
     # TODO: Locale methods
@@ -716,6 +729,8 @@ class Text(CitationStylesElement, FormatNumber, Formatted, Affixed, Quoted,
             return False
 
     def render(self, *args, **kwargs):
+        if not args or args[0] is None:
+            pass
         text, language = self.process(*args, **kwargs)
         return self.markup(text, language)
 
@@ -767,10 +782,11 @@ class Text(CitationStylesElement, FormatNumber, Formatted, Affixed, Quoted,
         if form == 'long':
             form = None
         term = self.get_term(self.get('term'), form)
+
         if plural:
             text = term.multiple
         else:
-            text = term.single
+            text = None
 
         return text
 
@@ -946,7 +962,11 @@ class Date_Part(CitationStylesElement, Formatted, Affixed, TextCased,
                 text = context.get_term('{}-{:02}'.format(term, index)).single
             elif form == 'short':
                 term = context.get_term('{}-{:02}'.format(term, index), 'short')
-                text = term.single
+
+                if term is not None:
+                    text = term.single
+                else:
+                    text = None
             else:
                 assert term == 'month'
                 if form == 'numeric':
@@ -1057,21 +1077,24 @@ class Names(CitationStylesElement, Parent, Formatted, Affixed, Delimited):
                 if name_elem is None:
                     name_elem = Name()
                     names_context.insert(0, name_elem)
-                text = name_elem.render(item, role, context=context, **kwargs)
-                plural = len(item.reference[role]) > 1
+                text = None
                 try:
+                    text = name_elem.render(item, role, context=context, **kwargs)
+                    plural = len(item.reference[role]) > 1
                     if ed_trans:
                         role = 'editortranslator'
                     label_element = names_context.label
-                    label = label_element.render(item, role, plural, **kwargs)
-                    if label is not None:
-                        if label_element is names_context.getchildren()[0]:
-                            text = label + text
-                        else:
-                            text = text + label
+                    if label_element is not None:
+                        label = label_element.render(item, role, plural, **kwargs)
+                        if label is not None:
+                            if label_element is names_context.getchildren()[0]:
+                                text = label + text
+                            else:
+                                text = text + label
                 except AttributeError:
                     pass
-                output.append(text)
+                if text is not None:
+                    output.append(text)
 
         if output:
             try:
@@ -1337,11 +1360,14 @@ class Label(CitationStylesElement, Formatted, Affixed, StrippedPeriods,
         else:
             term = self.get_term(variable, form)
 
-        if (plural_option == 'contextual' and plural or
-            plural_option == 'always'):
-            text = term.multiple
+        if term is not None:
+            if (plural_option == 'contextual' and plural or
+                plural_option == 'always'):
+                text = term.multiple
+            else:
+                text = term.single
         else:
-            text = term.single
+            text = None
 
         return text
 
