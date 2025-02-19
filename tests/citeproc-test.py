@@ -16,7 +16,7 @@ from citeproc.source.json import CiteProcJSON
 
 
 CITEPROC_TEST_REPOSITORY = 'https://github.com/citation-style-language/test-suite.git'
-CITEPROC_TEST_COMMIT = '4001cdada66cd30f2ba1b8ae45a8da20f407dec0'
+CITEPROC_TEST_COMMIT = 'd2bd47ff09db6e2995aeed2be0b096b12c0f8f70'
 
 CITEPROC_TEST_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__),
                                      'test-suite'))
