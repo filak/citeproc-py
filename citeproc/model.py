@@ -74,10 +74,12 @@ class CitationStylesElement(SomewhatObjectifiedElement):
 
     def get_macro(self, name):
         expression = "cs:macro[@name='{}'][1]".format(name)
-        return self.get_root().xpath_search(expression)[0]
+        macros = self.get_root().xpath_search(expression)
+        return macros[0] if macros else None
 
     def get_layout(self):
-        return self.xpath_search('./ancestor-or-self::cs:layout[1]')[0]
+        layouts = self.xpath_search('./ancestor-or-self::cs:layout[1]')
+        return layouts[0] if layouts else None
 
     def get_formatter(self):
         if isinstance(self.get_root(), Locale):
@@ -934,7 +936,7 @@ class Date_Part(CitationStylesElement, Formatted, Affixed, TextCased,
         except (AttributeError, IndexError):
             pass
 
-        if name == 'day':
+        if name == 'day' and date.day:
             form = self.get('form', 'numeric')
             if (form == 'ordinal'
                 and self.get_locale_option('limit-day-ordinals-to-day-1')
@@ -948,7 +950,7 @@ class Date_Part(CitationStylesElement, Formatted, Affixed, TextCased,
                 text = '{:02}'.format(date.day)
             elif form == 'ordinal':
                 text = to_ordinal(date.day, context)
-        elif name == 'month':
+        elif name == 'month' and date.month:
             form = self.get('form', 'long')
             strip_periods = self.get('form', False)
             try:
@@ -967,7 +969,7 @@ class Date_Part(CitationStylesElement, Formatted, Affixed, TextCased,
                     text = '{}'.format(index)
                 elif form == 'numeric-leading-zeros':
                     text = '{:02}'.format(index)
-        elif name == 'year':
+        elif name == 'year' and date.year:
             form = self.get('form', 'long')
             if form == 'long':
                 text = str(abs(date.year))
@@ -1071,21 +1073,24 @@ class Names(CitationStylesElement, Parent, Formatted, Affixed, Delimited):
                 if name_elem is None:
                     name_elem = Name()
                     names_context.insert(0, name_elem)
-                text = name_elem.render(item, role, context=context, **kwargs)
-                plural = len(item.reference[role]) > 1
+                text = None
                 try:
+                    text = name_elem.render(item, role, context=context, **kwargs)
+                    plural = len(item.reference[role]) > 1
                     if ed_trans:
                         role = 'editortranslator'
                     label_element = names_context.label
-                    label = label_element.render(item, role, plural, **kwargs)
-                    if label is not None:
-                        if label_element is names_context.getchildren()[0]:
-                            text = label + text
-                        else:
-                            text = text + label
+                    if label_element is not None:
+                        label = label_element.render(item, role, plural, **kwargs)
+                        if label is not None:
+                            if label_element is names_context.getchildren()[0]:
+                                text = label + text
+                            else:
+                                text = text + label
                 except AttributeError:
                     pass
-                output.append(text)
+                if text is not None:
+                    output.append(text)
 
         if output:
             try:

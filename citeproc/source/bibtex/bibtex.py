@@ -39,7 +39,7 @@ class BibTeX(BibliographySource):
 #              'type': None,
 #              'year': None,
               'volume': 'volume',
-
+              'url': 'URL',
               # non-standard fields
               'isbn': 'ISBN',
               'issn': 'ISSN'}
