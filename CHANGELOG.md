@@ -1,3 +1,15 @@
+# v0.9.0 (Mon Aug 25 2025)
+
+#### 🚀 Enhancement
+
+- Feature/flexible style loading [#180](https://github.com/citeproc-py/citeproc-py/pull/180) ([@yarikoptic](https://github.com/yarikoptic))
+
+#### Authors: 1
+
+- Yaroslav Halchenko ([@yarikoptic](https://github.com/yarikoptic))
+
+---
+
 # v0.8.3 (Mon Aug 18 2025)
 
 #### 🐛 Bug Fix
