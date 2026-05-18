@@ -1,3 +1,48 @@
+# v0.9.3 (Thu Apr 30 2026)
+
+#### 🐛 Bug Fix
+
+- fix: Et_Al looked up literal term name 'variable' instead of the local variable [#190](https://github.com/citeproc-py/citeproc-py/pull/190) ([@Jasaj4](https://github.com/Jasaj4))
+
+#### 🔩 Dependency Updates
+
+- Bump actions/checkout from 4 to 6 [#187](https://github.com/citeproc-py/citeproc-py/pull/187) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Bump actions/setup-python from 5 to 6 [#186](https://github.com/citeproc-py/citeproc-py/pull/186) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### Authors: 2
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- [@Jasaj4](https://github.com/Jasaj4)
+
+---
+
+# v0.9.2 (Tue Apr 21 2026)
+
+#### 🐛 Bug Fix
+
+- setup: add citeproc-py-styles to tests [#189](https://github.com/citeproc-py/citeproc-py/pull/189) ([@tmorrell](https://github.com/tmorrell))
+
+#### Authors: 1
+
+- Tom Morrell ([@tmorrell](https://github.com/tmorrell))
+
+---
+
+# v0.9.1 (Mon Apr 20 2026)
+
+#### 🐛 Bug Fix
+
+- Add Dependabot configuration for GitHub Actions [#185](https://github.com/citeproc-py/citeproc-py/pull/185) ([@tmorrell](https://github.com/tmorrell))
+- tests: drop python 3.9 [#179](https://github.com/citeproc-py/citeproc-py/pull/179) ([@tmorrell](https://github.com/tmorrell))
+- Fix ordinal suffixes when style has embedded locale without ordinal terms [#184](https://github.com/citeproc-py/citeproc-py/pull/184) ([@Copilot](https://github.com/Copilot))
+
+#### Authors: 2
+
+- [@Copilot](https://github.com/Copilot)
+- Tom Morrell ([@tmorrell](https://github.com/tmorrell))
+
+---
+
 # v0.9.0 (Mon Aug 25 2025)
 
 #### 🚀 Enhancement
