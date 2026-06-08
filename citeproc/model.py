@@ -16,6 +16,11 @@ from .string import String, join
 
 # Base class
 
+class CSLStyleError(ValueError):
+    """Invalid or malformed CSL style."""
+    pass
+
+
 class SomewhatObjectifiedElement(etree.ElementBase):
     nsmap = {'cs': 'http://purl.org/net/xbiblio/csl',
              'xml': 'http://www.w3.org/XML/1998/namespace'}
@@ -73,13 +78,28 @@ class CitationStylesElement(SomewhatObjectifiedElement):
         return self.get(name, self._default_options[name])
 
     def get_macro(self, name):
-        expression = "cs:macro[@name='{}'][1]".format(name)
+        expression = f"cs:macro[@name='{name}'][1]"
         macros = self.get_root().xpath_search(expression)
-        return macros[0] if macros else None
+
+        if not macros:
+            raise CSLStyleError(
+                f"CSL style error: macro '{name}' not found"
+            )
+
+        return macros[0]
 
     def get_layout(self):
-        layouts = self.xpath_search('./ancestor-or-self::cs:layout[1]')
-        return layouts[0] if layouts else None
+        layouts = self.xpath_search(
+            './ancestor-or-self::cs:layout[1]'
+        )
+
+        if not layouts:
+            raise CSLStyleError(
+                f"CSL style error: no layout found for element "
+                f"'{self.tag}'"
+            )
+
+        return layouts[0]
 
     def get_formatter(self):
         if isinstance(self.get_root(), Locale):
@@ -527,12 +547,22 @@ class Key(CitationStylesElement):
                 if option in self.attrib:
                     name = option.replace('names', 'et-al')
                     sort_options[name] = self.get(option)
-            macro = self.get_macro(self.get('macro'))
+            try:
+                macro = self.get_macro(self.get('macro'))
+            except CSLStyleError:
+                return [None] * len(items)
             sort_keys = []
             for item in items:
                 layout.repressed = {}
-                sort_key = macro.render(item, context=context,
-                                        sort_options=sort_options)
+                try:
+                    sort_key = macro.render(
+                        item,
+                        context=context,
+                        sort_options=sort_options
+                    )
+                except CSLStyleError:
+                    sort_key = None
+
                 sort_keys.append(sort_key)
 
         return sort_keys
@@ -729,7 +759,11 @@ class Text(CitationStylesElement, FormatNumber, Formatted, Affixed, Quoted,
         if 'variable' in self.attrib:
             return self.get('variable') not in self.generated_variables
         elif 'macro' in self.attrib:
-            return self.get_macro(self.get('macro')).calls_variable()
+            try:
+                macro = self.get_macro(self.get('macro'))
+                return macro.calls_variable()
+            except CSLStyleError:
+                return False
         else:
             return False
 
@@ -748,7 +782,11 @@ class Text(CitationStylesElement, FormatNumber, Formatted, Affixed, Quoted,
         if 'variable' in self.attrib:
             text = self._variable(item, context)
         elif 'macro' in self.attrib:
-            text = self.get_macro(self.get('macro')).render(item, context)
+            try:
+                macro = self.get_macro(self.get('macro'))
+                text = macro.render(item, context)
+            except CSLStyleError:
+                return None, language
         elif 'term' in self.attrib:
             text = self._term(item)
         elif 'value' in self.attrib:
@@ -758,7 +796,12 @@ class Text(CitationStylesElement, FormatNumber, Formatted, Affixed, Quoted,
 
     def _variable(self, item, context):
         variable = self.get('variable')
-        repressed = context.get_layout().repressed
+        try:
+            layout = context.get_layout()
+        except CSLStyleError:
+            return None
+
+        repressed = layout.repressed
         if self.tag in repressed and variable in repressed[self.tag]:
             return None
 
