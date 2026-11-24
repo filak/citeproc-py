@@ -1,3 +1,218 @@
+# v0.12.3 (Thu Nov 12 2026)
+
+#### 🐛 Bug Fix
+
+- Made missing field test faster [#219](https://github.com/citeproc-py/citeproc-py/pull/219) ([@3top1a](https://github.com/3top1a))
+- Fixed variables not being initialized [#219](https://github.com/citeproc-py/citeproc-py/pull/219) ([@3top1a](https://github.com/3top1a))
+- Make citeproc-py-styles optional in tests [#222](https://github.com/citeproc-py/citeproc-py/pull/222) ([@hseg](https://github.com/hseg))
+- Fix BibTeX name parsing with trailing whitespace [#220](https://github.com/citeproc-py/citeproc-py/pull/220) ([@RClaudiuM](https://github.com/RClaudiuM))
+
+#### Authors: 3
+
+- [@hseg](https://github.com/hseg)
+- 3top1a ([@3top1a](https://github.com/3top1a))
+- Roman Claudiu (ClaW) ([@RClaudiuM](https://github.com/RClaudiuM))
+
+---
+
+# v0.12.2 (Wed Nov 11 2026)
+
+#### 🐛 Bug Fix
+
+- Add support for 3.15 and remove 3.10 [#221](https://github.com/citeproc-py/citeproc-py/pull/221) ([@tmorrell](https://github.com/tmorrell))
+
+#### Authors: 1
+
+- Tom Morrell ([@tmorrell](https://github.com/tmorrell))
+
+---
+
+# v0.12.1 (Fri Oct 30 2026)
+
+#### 🐛 Bug Fix
+
+- Render cs:label only when the labelled variable is set [#207](https://github.com/citeproc-py/citeproc-py/pull/207) ([@eseifert](https://github.com/eseifert))
+
+#### Authors: 1
+
+- Erich Seifert ([@eseifert](https://github.com/eseifert))
+
+---
+
+# v0.12.0 (Fri Oct 30 2026)
+
+#### 🚀 Enhancement
+
+- docs: mention ruff in README and CONTRIBUTING [#212](https://github.com/citeproc-py/citeproc-py/pull/212) ([@alexfikl](https://github.com/alexfikl))
+- test: add ruff to ci [#212](https://github.com/citeproc-py/citeproc-py/pull/212) ([@alexfikl](https://github.com/alexfikl))
+- fix: all ruff B errors [#212](https://github.com/citeproc-py/citeproc-py/pull/212) ([@alexfikl](https://github.com/alexfikl))
+- fix: all ruff Q errors [#212](https://github.com/citeproc-py/citeproc-py/pull/212) ([@alexfikl](https://github.com/alexfikl))
+- fix: all ruff I errors [#212](https://github.com/citeproc-py/citeproc-py/pull/212) ([@alexfikl](https://github.com/alexfikl))
+- fix: all ruff W errors [#212](https://github.com/citeproc-py/citeproc-py/pull/212) ([@alexfikl](https://github.com/alexfikl))
+- fix: all ruff F errors [#212](https://github.com/citeproc-py/citeproc-py/pull/212) ([@alexfikl](https://github.com/alexfikl))
+- fix: all ruff E errors [#212](https://github.com/citeproc-py/citeproc-py/pull/212) ([@alexfikl](https://github.com/alexfikl))
+- fix: all ruff UP errors [#212](https://github.com/citeproc-py/citeproc-py/pull/212) ([@alexfikl](https://github.com/alexfikl))
+- chore: add ruff config [#212](https://github.com/citeproc-py/citeproc-py/pull/212) ([@alexfikl](https://github.com/alexfikl))
+
+#### Authors: 1
+
+- Alex Fikl ([@alexfikl](https://github.com/alexfikl))
+
+---
+
+# v0.11.1 (Tue Sep 01 2026)
+
+#### 🐛 Bug Fix
+
+- Contributing: update contributing guidelines [#214](https://github.com/citeproc-py/citeproc-py/pull/214) ([@tmorrell](https://github.com/tmorrell))
+- coverage: ignore _version.py [#214](https://github.com/citeproc-py/citeproc-py/pull/214) ([@tmorrell](https://github.com/tmorrell))
+- tests: recommend tox and modernize coveralls setup [#214](https://github.com/citeproc-py/citeproc-py/pull/214) ([@tmorrell](https://github.com/tmorrell))
+
+#### 🏠 Internal
+
+- tests: remove global, ancient python code, and deprecated load_module [#213](https://github.com/citeproc-py/citeproc-py/pull/213) ([@tmorrell](https://github.com/tmorrell))
+
+#### Authors: 1
+
+- Tom Morrell ([@tmorrell](https://github.com/tmorrell))
+
+---
+
+# v0.11.0 (Thu Aug 20 2026)
+
+#### 🚀 Enhancement
+
+- test: refresh citeproc seam expectations [#208](https://github.com/citeproc-py/citeproc-py/pull/208) ([@tomatotomata](https://github.com/tomatotomata))
+- fix: normalize punctuation at formatter seams [#208](https://github.com/citeproc-py/citeproc-py/pull/208) ([@tomatotomata](https://github.com/tomatotomata))
+- Update compatability description [#208](https://github.com/citeproc-py/citeproc-py/pull/208) ([@tmorrell](https://github.com/tmorrell))
+- Normalize whitespace and duplicate punctuation at string seams [#208](https://github.com/citeproc-py/citeproc-py/pull/208) ([@tmorrell](https://github.com/tmorrell))
+
+#### Authors: 2
+
+- Tom Morrell ([@tmorrell](https://github.com/tmorrell))
+- tomatotomata ([@tomatotomata](https://github.com/tomatotomata))
+
+---
+
+# v0.10.7 (Mon Aug 10 2026)
+
+#### 🐛 Bug Fix
+
+- fix default delimiter [#201](https://github.com/citeproc-py/citeproc-py/pull/201) ([@tmorrell](https://github.com/tmorrell))
+
+#### Authors: 1
+
+- Tom Morrell ([@tmorrell](https://github.com/tmorrell))
+
+---
+
+# v0.10.6 (Mon Aug 10 2026)
+
+#### 🐛 Bug Fix
+
+- Count citation-number as a variable call in cs:group [#206](https://github.com/citeproc-py/citeproc-py/pull/206) ([@eseifert](https://github.com/eseifert))
+
+#### Authors: 1
+
+- Erich Seifert ([@eseifert](https://github.com/eseifert))
+
+---
+
+# v0.10.5 (Mon Aug 10 2026)
+
+#### 🐛 Bug Fix
+
+- fix(model): add defensive check in get_locale_option() for Locale roots [#209](https://github.com/citeproc-py/citeproc-py/pull/209) ([@kyodai0000](https://github.com/kyodai0000))
+
+#### Authors: 1
+
+- Ondřej Ruml ([@kyodai0000](https://github.com/kyodai0000))
+
+---
+
+# v0.10.4 (Wed Aug 05 2026)
+
+#### 🐛 Bug Fix
+
+- setup.py: Prune imports [#191](https://github.com/citeproc-py/citeproc-py/pull/191) ([@hseg](https://github.com/hseg))
+- Remove unneeded nonuniversal wheel declaration [#191](https://github.com/citeproc-py/citeproc-py/pull/191) ([@hseg](https://github.com/hseg))
+- Fix project URL [#191](https://github.com/citeproc-py/citeproc-py/pull/191) ([@hseg](https://github.com/hseg))
+- Specify license file [#191](https://github.com/citeproc-py/citeproc-py/pull/191) ([@hseg](https://github.com/hseg))
+- Add missing build dep: lxml [#191](https://github.com/citeproc-py/citeproc-py/pull/191) ([@hseg](https://github.com/hseg))
+- Use entry points for running scripts [#191](https://github.com/citeproc-py/citeproc-py/pull/191) ([@hseg](https://github.com/hseg))
+- Use setuptools' builtin multifile longdesc support [#191](https://github.com/citeproc-py/citeproc-py/pull/191) ([@hseg](https://github.com/hseg))
+- Rely on setuptools' automatic package discovery [#191](https://github.com/citeproc-py/citeproc-py/pull/191) ([@hseg](https://github.com/hseg))
+- Migrate versioneer to pyproject.toml [#191](https://github.com/citeproc-py/citeproc-py/pull/191) ([@hseg](https://github.com/hseg))
+- Migrate simple metadata to pyproject.toml [#191](https://github.com/citeproc-py/citeproc-py/pull/191) ([@hseg](https://github.com/hseg))
+
+#### Authors: 1
+
+- [@hseg](https://github.com/hseg)
+
+---
+
+# v0.10.3 (Fri Jul 24 2026)
+
+#### 🐛 Bug Fix
+
+- swap csl 1.0.1 harvard1 for harvard-cite-them-right [#197](https://github.com/citeproc-py/citeproc-py/pull/197) ([@tmorrell](https://github.com/tmorrell))
+- tests: add python 3.14 [#199](https://github.com/citeproc-py/citeproc-py/pull/199) ([@tmorrell](https://github.com/tmorrell))
+
+#### 🔩 Dependency Updates
+
+- build(deps): bump actions/setup-python from 6 to 7 [#200](https://github.com/citeproc-py/citeproc-py/pull/200) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### Authors: 2
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- Tom Morrell ([@tmorrell](https://github.com/tmorrell))
+
+---
+
+# v0.10.2 (Tue Jul 21 2026)
+
+#### 🐛 Bug Fix
+
+- Additional chicago style page range formats in csl 1.0.2 [#198](https://github.com/citeproc-py/citeproc-py/pull/198) ([@tmorrell](https://github.com/tmorrell))
+
+#### Authors: 1
+
+- Tom Morrell ([@tmorrell](https://github.com/tmorrell))
+
+---
+
+# v0.10.1 (Wed Jul 08 2026)
+
+#### 🐛 Bug Fix
+
+- Update GitHub Actions for token and Python version [#196](https://github.com/citeproc-py/citeproc-py/pull/196) ([@tmorrell](https://github.com/tmorrell))
+- Better handle decimals in multiple number regex [#195](https://github.com/citeproc-py/citeproc-py/pull/195) ([@tmorrell](https://github.com/tmorrell))
+- fix spacing changes in csl 1.0.2 [#195](https://github.com/citeproc-py/citeproc-py/pull/195) ([@tmorrell](https://github.com/tmorrell))
+
+#### Authors: 1
+
+- Tom Morrell ([@tmorrell](https://github.com/tmorrell))
+
+---
+
+# v0.10.0 (Tue Jul 07 2026)
+
+#### 🚀 Enhancement
+
+- fix: preserve text case for non-english title case [#192](https://github.com/citeproc-py/citeproc-py/pull/192) ([@mairasalazar](https://github.com/mairasalazar))
+- Upgrade to csl 1.0.2 [#192](https://github.com/citeproc-py/citeproc-py/pull/192) ([@mairasalazar](https://github.com/mairasalazar))
+
+#### 🔩 Dependency Updates
+
+- Bump actions/checkout from 6 to 7 [#193](https://github.com/citeproc-py/citeproc-py/pull/193) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### Authors: 2
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- Maira Salazar ([@mairasalazar](https://github.com/mairasalazar))
+
+---
+
 # v0.9.3 (Thu Apr 30 2026)
 
 #### 🐛 Bug Fix

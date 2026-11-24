@@ -2,13 +2,9 @@
 
 # The references are parsed from a BibTeX database, so we import the
 # corresponding parser.
-from citeproc.source.bibtex import BibTeX
-
 # Import the citeproc-py classes we'll use below.
-from citeproc import CitationStylesStyle, CitationStylesBibliography
-from citeproc import formatter
-from citeproc import Citation, CitationItem
-
+from citeproc import Citation, CitationItem, CitationStylesBibliography, CitationStylesStyle, formatter
+from citeproc.source.bibtex import BibTeX
 
 # Parse the BibTeX database.
 
@@ -17,7 +13,7 @@ bib_source = BibTeX('xampl.bib')
 
 # load a CSL style (from the current directory)
 
-bib_style = CitationStylesStyle('harvard1', validate=False)
+bib_style = CitationStylesStyle('harvard-cite-them-right', validate=False)
 
 
 # Create the citeproc-py bibliography, passing it the:
@@ -55,8 +51,7 @@ bibliography.register(citation5)
 # bibliography.
 
 def warn(citation_item):
-    print("WARNING: Reference with key '{}' not found in the bibliography."
-          .format(citation_item.key))
+    print(f"WARNING: Reference with key '{citation_item.key}' not found in the bibliography.")
 
 
 print('Citations')

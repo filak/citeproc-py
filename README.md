@@ -6,7 +6,7 @@
 
 
 citeproc-py is a [CSL](https://citationstyles.org/) processor for Python. It aims to implement the
-[CSL 1.0.1 specification](https://docs.citationstyles.org/en/1.0.1/specification.html).
+[CSL 1.0.2 specification](https://docs.citationstyles.org/en/v1.0.2/specification.html).
 citeproc-py can output styled citations and
 bibliographies in a number of different output formats. Currently
 supported are plain text, reStructuredText and HTML. Other formats can
@@ -18,7 +18,7 @@ should not expect to see any major API changes soon.
 
 ## Requirements
 
-citeproc-py supports Python 3.9 and up. It depends on [lxml](https://lxml.de/) for parsing and
+citeproc-py supports Python 3.11 and up. It depends on [lxml](https://lxml.de/) for parsing and
 navigating the CSL style and locale files.
 
 # Installation
@@ -44,13 +44,9 @@ cite references and render the bibliography.
 
 ## CSL Compatibility
 
-Currently, citeproc-py passes almost 60% of the (relevant) tests in the
+Currently, citeproc-py passes about 60% of the tests in the
 [citeproc-test suite](https://github.com/citation-style-language/test-suite).
-However, it is more than 60% complete, as
-citeproc-py doesn't take care of double spaces and repeated punctuation
-marks yet, making a good deal of the tests fail. In addition, the
-following features have not yet been implemented (there are probably
-some I forgot though):
+A non-exhaustive list of functionality that is missing includes:
 
 -  disambiguation/year-suffix
 -  et-al-subsequent-min/et-al-subsequent-use-first
@@ -78,28 +74,33 @@ First clone the `citeproc-py` repository and install the submodules with
 git submodule update --init
 ```
 
-Then install with
-```bash
-pip install --editable .
-```
-
-Then move to the `tests` directory and run
-```bash
-python citeproc-test.py
-```
-
-Run
-```bash
-citeproc-test.py --help
-```
-to see its usage information. The first time
-you run the script it will clone the
-[citeproc-test suite](https://github.com/citation-style-language/test-suite) repository into the
-`tests` directory and checkout the last tested version. By default failed tests are
-automatically added into the `failing_tests.txt` file and aren't shown when
-running the test suite again.
-
-If you want git to fully ignore the submodule, you can type
+If you want git to fully ignore the submodules, you can type
 ```bash
 git update-index --assume-unchanged citeproc/data/schema
+git update-index --assume-unchanged citeproc/data/locales
 ```
+
+Then install with
+```bash
+pip install --editable .[tests]
+```
+
+You can run all the tests using tox:
+```bash
+tox run -e py314
+```
+
+Or you can manually run citeproc-test tests using
+```bash
+python tests/citeproc-test.py
+```
+
+The first time you run the script it will clone the [citeproc-test
+suite](https://github.com/citation-style-language/test-suite) repository into
+the `tests` directory and checkout the last tested version. By default failed
+tests are automatically added into the `failing_tests.txt` file and aren't
+shown when running the test suite again.
+
+`citeproc-py` uses `ruff` for linting. You can run it directly using `ruff check`.
+Any test failures or linting errors will show up on the CI and will need to be
+fixed before a Pull Request can be merged.

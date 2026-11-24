@@ -6,11 +6,9 @@ affix_MovingPunctuation
 affix_PrefixWithDecorations
 affix_SpaceWithQuotes
 affix_WithCommas
-bugreports_AllCapsLeakage
 bugreports_ApostropheOnParticle
 bugreports_AsaSpacing
 bugreports_AsmJournals
-bugreports_AuthorPosition
 bugreports_AutomaticallyDeleteItemsFails
 bugreports_BadCitationUpdate
 bugreports_BadDelimiterBeforeCollapse
@@ -27,16 +25,13 @@ bugreports_DisambiguationAddNamesBibliography
 bugreports_DoubleEncodedAngleBraces
 bugreports_DuplicateSpaces
 bugreports_DuplicateSpaces2
-bugreports_DuplicateSpaces3
 bugreports_DuplicateTerminalPunctuationInBibliography
 bugreports_EnvAndUrb
 bugreports_EtAlSubsequent
 bugreports_FourAndFour
 bugreports_FrenchApostrophe
 bugreports_GreekStyleProblems                                      # uncaught exception
-bugreports_GreekStyleTwoEditors                                    # uncaught exception
 bugreports_IeeePunctuation
-bugreports_LabelsOutOfPlace
 bugreports_LegislationCrash
 bugreports_MatchedAuthorAndDate
 bugreports_MovePunctuationInsideQuotesForLocator
@@ -50,18 +45,14 @@ bugreports_SingleQuote
 bugreports_SmallCapsEscape
 bugreports_SortSecondaryKey
 bugreports_SortedIeeeItalicsFail
-bugreports_StyleError001
 bugreports_ThesisUniversityAppearsTwice
 bugreports_TitleCase
-bugreports_UndefinedBeforeVal
-bugreports_UndefinedInName3
 bugreports_UndefinedNotString
 bugreports_UndefinedStr
 bugreports_YearSuffixInHarvard1
 bugreports_YearSuffixLingers
 bugreports_disambigHang
 bugreports_ikeyOne
-bugreports_parenthesis
 bugreports_parseName
 collapse_AuthorCollapse
 collapse_AuthorCollapseNoDate
@@ -73,7 +64,6 @@ collapse_CitationNumberRangesMixed2
 collapse_CitationNumberRangesMixed3
 collapse_CitationNumberRangesWithAffixes
 collapse_CitationNumberRangesWithAffixesGrouped
-collapse_CitationNumberRangesWithAffixesGroupedLocator
 collapse_NumericDuplicate
 collapse_NumericDuplicate2
 collapse_TrailingDelimiter
@@ -87,7 +77,6 @@ date_RangeDelimiter
 date_VariousInvalidDates                                           # uncaught exception
 date_YearSuffixDelimiter
 date_YearSuffixImplicitWithNoDate
-date_YearSuffixImplicitWithNoDateOneOnly
 date_YearSuffixWithNoDate
 decorations_AndTermUnaffectedByNameDecorations
 decorations_Baseline
@@ -149,10 +138,8 @@ disambiguate_YearSuffixWithEtAlSubsequent
 disambiguate_YearSuffixWithMixedCreatorTypes
 display_AuthorAsHeading
 display_DisplayBlock
-display_LostSuffix
 display_SecondFieldAlignClone
 display_SecondFieldAlignMigratePunctuation
-etal_CitationAndBibliographyDecorationsInBibliography
 etal_UseZeroFirst
 flipflop_ApostropheInsideTag
 flipflop_Apostrophes
@@ -174,7 +161,6 @@ flipflop_StartingApostrophe
 fullstyles_ABdNT
 fullstyles_ChicagoArticleTitleQuestion
 fullstyles_ChicagoAuthorDateSimple
-group_ComplexNesting
 group_SuppressTermInMacro
 integration_DeleteName
 integration_DisambiguateAddGivenname1
@@ -264,7 +250,6 @@ name_SubsequentAuthorSubstituteMultipleNames
 name_SubsequentAuthorSubstituteSingleField
 name_SubstituteInheritLabel
 name_SubstitutePartialEach
-name_TwoRolesSameRenderingSeparateRoleLabels
 name_WithNonBreakingSpace
 name_namepartAffixes
 nameattr_EtAlUseFirstOnCitationInBibliography
@@ -290,7 +275,6 @@ position_IfIbidWithLocatorIsTrueThenIbidIsTrue
 position_NearNoteSameNote                                          # uncaught exception
 position_ResetNoteNumbers
 punctuation_DefaultYearSuffixDelimiter
-punctuation_DelimiterWithStripPeriodsAndSubstitute2
 punctuation_FieldDuplicates
 punctuation_FrenchOrthography
 punctuation_FullMontyField
@@ -298,13 +282,11 @@ punctuation_FullMontyPlain
 punctuation_FullMontyQuotesIn
 punctuation_FullMontyQuotesOut
 punctuation_OnMacro
-punctuation_SemicolonDelimiter
 punctuation_SuppressPrefixPeriodForDelimiterSemicolon
 quotes_Punctuation
 quotes_PunctuationNasty
 quotes_PunctuationWithInnerQuote
 quotes_QuotesUnderQuotesFalse
-simplespace_case1
 sort_AguStyle
 sort_AguStyleReverseGroups
 sort_AuthorDateWithYearSuffix
@@ -339,7 +321,6 @@ textcase_LocaleUnicode
 textcase_Lowercase
 textcase_NoSpaceBeforeApostrophe
 textcase_NonEnglishChars
-textcase_RepeatedTitleBug
 textcase_SkipNameParticlesInTitleCase
 textcase_StopWordBeforeHyphen
 textcase_TitleCapitalization2
